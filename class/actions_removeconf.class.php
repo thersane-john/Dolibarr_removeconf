@@ -228,7 +228,7 @@ class Actionsremoveconf
 			}
 
 			//Modif
-			if (($action == 'modif') && ($user->rights->removeconf->update_order)){
+			if (($action == 'modif') && ($user->hasRight('removeconf', 'update_order'))){
 				$this->results = true;
 				$page = $_SERVER["PHP_SELF"] . '?id=' . $object->id;
 				$action_confirm = 'confirm_modif';
@@ -252,7 +252,7 @@ class Actionsremoveconf
 			}
 
 			//ask_deleteline
-			if (($action == 'ask_deleteline') && ($user->rights->removeconf->delete_order_line)){
+			if (($action == 'ask_deleteline') && ($user->hasRight('removeconf', 'delete_order_line'))){
 				$this->results = true;
 				$page = $_SERVER["PHP_SELF"] . '?id=' . $object->id . '&lineid=' . $parameters['lineid'];
 				$action_confirm = 'confirm_deleteline';
@@ -437,7 +437,7 @@ class Actionsremoveconf
 
         // BOM
         if (strpos($parameters['context'], 'bomcard') !== false){
-            
+
 			dol_syslog(get_class($this).'::Context = bomcard', LOG_DEBUG, 1 , '', '');
 
             //Bom Delete
@@ -493,7 +493,7 @@ class Actionsremoveconf
 
         // MO
         if (strpos($parameters['context'], 'mocard') !== false){
-            
+
 			dol_syslog(get_class($this).'::Context = mocard', LOG_DEBUG, 1 , '', '');
 
             //MO Delete
@@ -542,7 +542,7 @@ class Actionsremoveconf
 
         // Purchase order
         if (strpos($parameters['context'], 'ordersuppliercard') !== false){
-        	
+
 			dol_syslog(get_class($this).'::Context = ordersuppliercard', LOG_DEBUG, 1 , '', '');
 
         	// Purchase order Delete
@@ -585,7 +585,7 @@ class Actionsremoveconf
 					$action_confirm = "confirm_".$action;
 					dol_syslog(get_class($this).'::action = '.$action, LOG_DEBUG, 1 , '', '');
 				}
-			}			
+			}
         	// Purchase order refuse
         	if (($action == 'refuse') && ($user->rights->removeconf->refuse_purchase_order)){
         		$this->results = true;
